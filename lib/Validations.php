@@ -608,6 +608,23 @@ class Validations
 		}
 	}
 
+	public function validates_word_count_of($attributes)
+	{
+		foreach ($attributes as $attribute)
+		{
+			$field_name = $attribute[0];
+		
+			$out = array();
+			$word_count = preg_match_all("/[\s\.\_\?\-\!]+/", 
+				$this->model->$field_name, $out);
+	
+			if ($word_count > $attribute['limit'])
+			{
+				$this->record->add($field_name, $attribute['message']);
+			}
+		}
+	}
+	
 	private function is_null_with_option($var, &$options)
 	{
 		return (is_null($var) && (isset($options['allow_null']) && $options['allow_null']));

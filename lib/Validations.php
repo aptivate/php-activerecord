@@ -615,9 +615,9 @@ class Validations
 			$field_name = $attribute[0];
 		
 			$out = array();
-			$word_count = preg_match_all("/[\s\.\_\?\-\!]+/", 
-				$this->model->$field_name, $out);
-	
+			$word_count = count(preg_split("/[\s\.\_\?\-\!]+/", 
+    			$this->model->$field_name));
+
 			if ($word_count > $attribute['limit'])
 			{
 				$this->record->add($field_name, $attribute['message']);

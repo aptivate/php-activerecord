@@ -614,9 +614,8 @@ class Validations
 		{
 			$field_name = $attribute[0];
 		
-			$out = array();
-			$word_count = count(preg_split("/[\s\.\_\?\-\!]+/", 
-    			$this->model->$field_name));
+			$text = trim($this->model->$field_name);
+			$word_count = count(preg_split("/[\s\.\_\?\-\!]+/", $text));
 
 			if ($word_count > $attribute['limit'])
 			{
